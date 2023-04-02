@@ -1,0 +1,26 @@
+CREATE DEFINER=`root`@`localhost` TRIGGER `specializaremedici_AFTER_INSERT` AFTER INSERT ON `specializaremedici` FOR EACH ROW BEGIN
+INSERT INTO RaportSpecializari (idSpecializare, luna, sumTotal)
+    VALUES (NEW.idSpecializare, '1', '0');
+    INSERT INTO RaportSpecializari (idSpecializare, luna, sumTotal)
+    VALUES (NEW.idSpecializare, '2', '0');
+    INSERT INTO RaportSpecializari (idSpecializare, luna, sumTotal)
+    VALUES (NEW.idSpecializare, '3', '0');
+    INSERT INTO RaportSpecializari (idSpecializare, luna, sumTotal)
+    VALUES (NEW.idSpecializare, '4', '0');
+    INSERT INTO RaportSpecializari (idSpecializare, luna, sumTotal)
+    VALUES (NEW.idSpecializare, '5', '0');
+    INSERT INTO RaportSpecializari (idSpecializare, luna, sumTotal)
+    VALUES (NEW.idSpecializare, '6', '0');
+    INSERT INTO RaportSpecializari (idSpecializare, luna, sumTotal)
+    VALUES (NEW.idSpecializare, '7', '0');
+    INSERT INTO RaportSpecializari (idSpecializare, luna, sumTotal)
+    VALUES (NEW.idSpecializare, '8', '0');
+    INSERT INTO RaportSpecializari (idSpecializare, luna, sumTotal)
+    VALUES (NEW.idSpecializare, '9', '0');
+    INSERT INTO RaportSpecializari (idSpecializare, luna, sumTotal)
+    VALUES (NEW.idSpecializare, '10', '0');
+    INSERT INTO RaportSpecializari (idSpecializare, luna, sumTotal)
+    VALUES (NEW.idSpecializare, '11', '0');
+    INSERT INTO RaportSpecializari (idSpecializare, luna, sumTotal)
+    VALUES (NEW.idSpecializare, '12', '0');
+END

@@ -1,0 +1,30 @@
+CREATE DEFINER=`root`@`localhost` TRIGGER `medici_AFTER_INSERT` AFTER INSERT ON `medici` FOR EACH ROW BEGIN
+DECLARE salariu int;
+    SELECT Angajati.SalariuNegociat INTO salariu FROM Angajati
+    WHERE Angajati.idAngajat = NEW.idAngajat;
+    
+	INSERT INTO RaportMedici (idMedic, luna, sumSalariu, sumComision, sumTotal)
+    VALUES(NEW.idMedic, '1', '0', '0', '0');
+    INSERT INTO RaportMedici (idMedic, luna, sumSalariu, sumComision, sumTotal)
+    VALUES(NEW.idMedic, '2', '0', '0', '0');
+    INSERT INTO RaportMedici (idMedic, luna, sumSalariu, sumComision, sumTotal)
+    VALUES(NEW.idMedic, '3', '0', '0', '0');
+    INSERT INTO RaportMedici (idMedic, luna, sumSalariu, sumComision, sumTotal)
+    VALUES(NEW.idMedic, '4', '0', '0', '0');
+    INSERT INTO RaportMedici (idMedic, luna, sumSalariu, sumComision, sumTotal)
+    VALUES(NEW.idMedic, '5', '0', '0', '0');
+    INSERT INTO RaportMedici (idMedic, luna, sumSalariu, sumComision, sumTotal)
+    VALUES(NEW.idMedic, '6', '0', '0', '0');
+    INSERT INTO RaportMedici (idMedic, luna, sumSalariu, sumComision, sumTotal)
+    VALUES(NEW.idMedic, '7', '0', '0', '0');
+    INSERT INTO RaportMedici (idMedic, luna, sumSalariu, sumComision, sumTotal)
+    VALUES(NEW.idMedic, '8', '0', '0', '0');
+    INSERT INTO RaportMedici (idMedic, luna, sumSalariu, sumComision, sumTotal)
+    VALUES(NEW.idMedic, '9', '0', '0', '0');
+    INSERT INTO RaportMedici (idMedic, luna, sumSalariu, sumComision, sumTotal)
+    VALUES(NEW.idMedic, '10', '0', '0', '0');
+    INSERT INTO RaportMedici (idMedic, luna, sumSalariu, sumComision, sumTotal)
+    VALUES(NEW.idMedic, '11', '0', '0', '0');
+    INSERT INTO RaportMedici (idMedic, luna, sumSalariu, sumComision, sumTotal)
+    VALUES(NEW.idMedic, '12', '0', '0', '0');
+END

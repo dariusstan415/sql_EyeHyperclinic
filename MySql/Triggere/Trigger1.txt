@@ -1,0 +1,53 @@
+CREATE DEFINER=`root`@`localhost` TRIGGER `manytomanyconsultatieservicii_AFTER_INSERT` AFTER INSERT ON `manytomanyconsultatieservicii` FOR EACH ROW BEGIN
+DECLARE luna varchar(30);
+		DECLARE pret int;
+        DECLARE idPoliclinica int;
+        DECLARE dataConsult date;
+        DECLARE procentComision int;
+        DECLARE idMedic int;
+        DECLARE idSpecializare int;
+        DECLARE denumireSpecializare varchar(30);
+        
+        SELECT ServiciiMedicale.Specialitatea INTO denumireSpecializare
+        FROM ServiciiMedicale WHERE ServiciiMedicale.idServiciuMedical = NEW.idServiciuMedical;
+        
+        SELECT SpecializareMedici.idSpecializare INTO idSpecializare
+        FROM SpecializareMedici WHERE SpecializareMedici.Specializare = denumireSpecializare;
+        
+        SELECT Consultatie.idMedic INTO idMedic
+        FROM Consultatie WHERE Consultatie.idConsultatie = NEW.idConsultatie;
+        
+        SELECT Medici.Comision INTO procentComision
+        FROM Medici WHERE Medici.idMedic = idMedic;
+        
+        SELECT Consultatie.idPoliclinica INTO idPoliclinica
+        FROM Consultatie WHERE NEW.idConsultatie = Consultatie.idConsultatie;
+        
+		SELECT Consultatie.dataConsult INTO dataConsult
+        FROM Consultatie WHERE NEW.idConsultatie = Consultatie.idConsultatie;
+        
+        SELECT MONTH(dataConsult) INTO luna;
+        
+        SELECT ManyToManyMediciSpecializari.pretServiciu INTO pret FROM ManyToManyMediciSpecializari
+				WHERE ManyToManyMediciSpecializari.idServiciu = NEW.idServiciuMedical
+                AND ManyToManyMediciSpecializari.idMedic = idMedic;
+                
+		UPDATE ProfitPerMonth
+        SET ProfitPerMonth.venit = ProfitPerMonth.venit + pret,
+        ProfitPerMonth.cheltuieli = ProfitPerMonth.cheltuieli + procentComision / 100 * pret, 
+        ProfitPerMonth.profit = ProfitPerMonth.venit - ProfitPerMonth.cheltuieli
+        WHERE ProfitPerMonth.idPoliclinica = idPoliclinica
+        AND ProfitPerMonth.luna = luna;
+        
+        UPDATE RaportMedici
+        SET RaportMedici.sumSalariu = RaportMedici.sumSalariu + pret,
+        RaportMedici.sumComision = RaportMedici.sumComision + procentComision / 100 * pret,
+        RaportMedici.sumTotal = RaportMedici.sumTotal + procentComision / 100 * pret + pret
+        WHERE RaportMedici.idMedic = idMedic
+        AND RaportMedici.luna = luna;
+        
+        UPDATE RaportSpecializari
+        SET RaportSpecializari.sumTotal = RaportSpecializari.sumTotal + pret - procentComision / 100 * pret
+        WHERE RaportSpecializari.idSpecializare = idSpecializare
+        AND RaportSpecializari.luna = luna;
+END

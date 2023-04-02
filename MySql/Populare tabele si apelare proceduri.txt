@@ -1,0 +1,244 @@
+CALL P_Insert_ProgramFunctionare('1', '08:00 - 22:00');
+
+/* Ultima chestie: idProgramFunctionare*/
+CALL P_Insert_Policlinici ('Policlinica Green Eye', 'Onisifor Ghibu, nr. 29', '1');
+CALL P_Insert_Policlinici ('Policlinica Brown Eye', 'Bucuresti, nr. 15', '1');
+CALL P_Insert_Policlinici ('Policlinica Blue Eye', 'Paris, nr. 15', '1');
+CALL P_Insert_Policlinici ('Policlinica Purple Eye', 'Ploiesti, nr. 44', '1');
+
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('1', '1', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('1', '2', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('1', '3', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('1', '4', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('1', '5', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('1', '6', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('1', '7', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('1', '8', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('1', '9', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('1', '10', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('1', '11', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('1', '12', '0', '0', '0');
+
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('2', '1', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('2', '2', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('2', '3', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('2', '4', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('2', '5', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('2', '6', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('2', '7', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('2', '8', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('2', '9', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('2', '10', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('2', '11', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('2', '12', '0', '0', '0');
+
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('3', '1', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('3', '2', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('3', '3', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('3', '4', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('3', '5', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('3', '6', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('3', '7', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('3', '8', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('3', '9', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('3', '10', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('3', '11', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('3', '12', '0', '0', '0');
+
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('4', '1', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('4', '2', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('4', '3', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('4', '4', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('4', '5', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('4', '6', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('4', '7', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('4', '8', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('4', '9', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('4', '10', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('4', '11', '0', '0', '0');
+INSERT INTO ProfitPerMonth(idPoliclinica, luna, venit, cheltuieli, profit) VALUES('4', '12', '0', '0', '0');
+
+CALL P_Insert_GradAsistent ('1', 'Principal');
+CALL P_Insert_GradAsistent ('2', 'Secundar');
+
+CALL P_Insert_TipAsistent ('1', 'Generalist');
+CALL P_Insert_TipAsistent ('2', 'Laborator');
+CALL P_Insert_TipAsistent ('3', 'Radiologie');
+
+CALL P_Insert_Departament('1', 'Resurse Umane');
+CALL P_Insert_Departament('2', 'Economic');
+CALL P_Insert_Departament('3', 'Medical');
+CALL P_Insert_Departament('4', 'Admministrativ');
+
+CALL P_Insert_Functie('1', 'Inspector resurse umane', '1');
+CALL P_Insert_Functie('2', 'Expert financiar-contabil', '2');
+CALL P_Insert_Functie('3', 'Receptioner', '2');
+CALL P_Insert_Functie('4', 'Asistent medical', '3');
+CALL P_Insert_Functie('5', 'Medic', '3');
+CALL P_Insert_Functie('6', 'Administrator', '4');
+CALL P_Insert_Functie('7', 'Super-administrator', '4');
+
+CALL P_Insert_SpecializareMedici('Chirurgie');
+CALL P_Insert_SpecializareMedici('Ortopedie');
+CALL P_Insert_SpecializareMedici('Ginecologie');
+CALL P_Insert_SpecializareMedici('Cardiologie');
+CALL P_Insert_SpecializareMedici('Oftalmologie');
+CALL P_Insert_SpecializareMedici('Dermatologie');
+CALL P_Insert_SpecializareMedici('Reumatologie');
+CALL P_Insert_SpecializareMedici('Pneumologie');
+CALL P_Insert_SpecializareMedici('Psihiatrie');
+CALL P_Insert_SpecializareMedici('Gastrolo-Enterologie');
+CALL P_Insert_SpecializareMedici('Neurologie');
+CALL P_Insert_SpecializareMedici('Neurochirurgie');
+CALL P_Insert_SpecializareMedici('ORL');
+
+CALL P_Insert_Cabinete('1A', '1');
+CALL P_Insert_Cabinete('2A', '1');
+CALL P_Insert_Cabinete('3A', '1');
+CALL P_Insert_Cabinete('1B', '1');
+CALL P_Insert_Cabinete('2B', '1');
+CALL P_Insert_Cabinete('3B', '1');
+
+CALL P_Insert_Cabinete('1A', '2');
+CALL P_Insert_Cabinete('2A', '2');
+CALL P_Insert_Cabinete('3A', '2');
+CALL P_Insert_Cabinete('1B', '2');
+CALL P_Insert_Cabinete('2B', '2');
+CALL P_Insert_Cabinete('3B', '2');
+
+CALL P_Insert_Cabinete('1A', '3');
+CALL P_Insert_Cabinete('2A', '3');
+CALL P_Insert_Cabinete('3A', '3');
+CALL P_Insert_Cabinete('1B', '3');
+CALL P_Insert_Cabinete('2B', '3');
+CALL P_Insert_Cabinete('3B', '3');
+
+CALL P_Insert_Cabinete('1A', '4');
+CALL P_Insert_Cabinete('2A', '4');
+CALL P_Insert_Cabinete('3A', '4');
+CALL P_Insert_Cabinete('1B', '4');
+CALL P_Insert_Cabinete('2B', '4');
+CALL P_Insert_Cabinete('3B', '4');
+
+/* 1. idCabinet, 2. idServiciuMedical*/
+CALL P_Insert_ManyToManyCabineteServiciiMedicale('1', '6', '1'); /* Audiograma */
+CALL P_Insert_ManyToManyCabineteServiciiMedicale('1', '9', '2'); /* Timpanograma */
+CALL P_Insert_ManyToManyCabineteServiciiMedicale('1', '10', '3'); /* Test de glicerol */
+
+CALL P_Insert_ManyToManyCabineteServiciiMedicale('2', '6', '1'); /* Audiograma */
+CALL P_Insert_ManyToManyCabineteServiciiMedicale('2', '9', '2'); /* Timpanograma */
+CALL P_Insert_ManyToManyCabineteServiciiMedicale('2', '10', '3'); /* Test de glicerol */
+
+CALL P_Insert_ManyToManyCabineteServiciiMedicale('3', '8', '1'); /* EKG */
+CALL P_Insert_ManyToManyCabineteServiciiMedicale('3', '7', '2'); /* Cardiograma */
+CALL P_Insert_ManyToManyCabineteServiciiMedicale('3', '11', '3'); /* Test efort */
+
+select * from functii;
+
+/* 1. idPoliclinica */
+CALL P_Insert_Utilizatori('1', '1111111111111', 'Hurghis', 'Alina', 'str. Nicolae, nr. 45, Tg. Jiu', '0741002322', 'hurghisalina@medic.gmail',
+'ROBTLR76547373828292', '11111', '1990-12-11', '5');
+/* 1. idPoliclinica */
+CALL P_Insert_Medici('1', '40', '5', '2000', 'Specialist', '11111', 'Doctor', 'Profesor Universitar', '5');
+
+CALL P_Insert_Utilizatori('1', '1111111111112', 'Galatan', 'Ana', 'str. Nicolae, nr. 45, Tg. Jiu', '0741653224', 'galatanana@medic.gmail',
+'ROBTLR76547311228293', '12132', '1991-11-11', '5');
+CALL P_Insert_Medici('1',  '40', '5', '2000', 'Specialist', '11112', 'Doctor', 'Profesor Universitar', '5');
+
+CALL P_Insert_Utilizatori('3', '1111111111113', 'Novac', 'Adela', 'str. Nicolae, nr. 45, Tg. Jiu', '0755653224', 'novacadela@medic.gmail',
+'ROBTLR76547311118292', '12133', '1991-11-11', '5');
+CALL P_Insert_Medici('1',  '40', '5', '1000', 'Primar', '11113', 'Doctor', 'Profesor Universitar', '10');
+
+CALL P_Insert_Utilizatori('1', '1111111111114', 'Morar', 'Matei', 'str. Nicolae, nr. 45, Tg. Jiu', '0755653224', 'morarmatei@receptioner.gmail',
+'ROBTLR76547311118222', '12134', '1991-11-11', '3');
+CALL P_Insert_Angajati('1', '40', '3', '1050');
+
+CALL P_Insert_Utilizatori('1', '1111111111115', 'Botos', 'Denis', 'str. Nicolae, nr. 45, Tg. Jiu', '0741002322', 'botosdenis@inspector.gmail',
+'ROBTLR76547373828292', '12135', '1990-12-11', '1');
+CALL P_Insert_Angajati('1', '40', '1', '1050');
+
+/* 1. idPoliclinica */
+CALL P_Insert_Utilizatori('1', '1111111111116', 'Sular', 'Bogdan', 'str. Nicolae, nr. 45, Tg. Jiu', '0741009322', 'sularbogdan@expert.gmail',
+'ROBTLR76547373828292', '12131', '1960-12-11', '2');
+/* 1. idPoliclinica */
+CALL P_Insert_Angajati('1', '40', '2', '1050');
+
+/* 1. idPoliclinica */
+CALL P_Insert_Utilizatori('1', '1111111111117', 'Loghin', 'Loren', 'str. Nicolae, nr. 45, Tg. Jiu', '0741009322', 'loghinloren@administrator.gmail',
+'ROBTLR76547373828292', '12144', '1960-12-11', '6');
+/* 1. idPoliclinica */
+CALL P_Insert_Angajati('1', '40', '6', '3000');
+
+CALL P_Insert_Utilizatori('1', '1111111111118', 'Blaga', 'Diana', 'str. Nicolae, nr. 45, Tg. Jiu', '0741009322', 'blagadiana@super-administrator.gmail',
+'ROBTLR76547373828292', '12144', '1960-12-11', '7');
+CALL P_Insert_Angajati('1', '40', '7', '3000');
+
+CALL P_Insert_Utilizatori('1', '1111111111118', 'Pop', 'Denisa', 'str. Nicolae, nr. 45, Tg. Jiu', '0741009322', 'popdenisa@asistent.gmail',
+'ROBTLR76547373828292', '12344', '1960-12-11', '4');
+CALL P_Insert_Angajati('1', '40', '4', '1080');
+
+CALL P_Insert_ServiciuMedical ('Endoscopie', 'Gastrolo-Enterologie', 'Endoscopie', '50', '20');
+CALL P_Insert_ServiciuMedical ('EEG', 'Neurologie', 'EEG', '75', '20');
+CALL P_Insert_ServiciuMedical ('Ecografie', 'Ginecologie', 'Ecografie', '40', '20');
+CALL P_Insert_ServiciuMedical ('Bronhoscopie', 'Pneumologie', 'Bronhoscopie', '30', '20');
+CALL P_Insert_ServiciuMedical ('Operatie hernie de disc', 'Neurochirurgie', 'Operatie hernie de disc', '30', '120');
+CALL P_Insert_ServiciuMedical ('Audiograma', 'ORL', 'Audiograma', '30', '50');
+CALL P_Insert_ServiciuMedical ('Cardiograma', 'Cardiologie', 'Cardiograma', '30', '50');
+CALL P_Insert_ServiciuMedical ('EKG', 'Cardiologie', 'EKG', '30', '50');
+CALL P_Insert_ServiciuMedical ('Timpanograma', 'ORL', 'Timpanograma', '30', '50');
+CALL P_Insert_ServiciuMedical ('Test de glicerol', 'ORL', 'Test de glicerol', '30', '60');
+CALL P_Insert_ServiciuMedical ('Test efort', 'Cardiologie', 'Test efort', '30', '45');
+select * from ServiciiMedicale;
+
+/* 1. idMedic, 2. Specializare, 3. gradMedic, 4. ServiciuMedical, 5. pretServiciu, 6. durataServiciu */
+CALL P_Insert_Specializari_ServiciiMedicale_For_Medic('1', 'Cardiologie', 'Specialist', 'EKG', '200', '40');
+CALL P_Insert_Specializari_ServiciiMedicale_For_Medic('1', 'Cardiologie', 'Specialist', 'Cardiograma', '200', '40');
+CALL P_Insert_Specializari_ServiciiMedicale_For_Medic('1', 'Cardiologie', 'Specialist', 'Test efort', '200', '40');
+CALL P_Insert_Specializari_ServiciiMedicale_For_Medic('2', 'ORL', 'Specialist', 'Timpanograma', '200', '40');
+CALL P_Insert_Specializari_ServiciiMedicale_For_Medic('2', 'ORL', 'Specialist', 'Audiograma', '200', '40');
+CALL P_Insert_Specializari_ServiciiMedicale_For_Medic('2', 'ORL', 'Specialist', 'Test de glicerol', '200', '40');
+
+/* 1. idPoliclinica, 2. idAngajat */
+CALL P_Insert_OrarAngajatiFaraMedici('1', '4', '08:00:00', '16:00:00');
+CALL P_Insert_OrarAngajatiFaraMedici('1', '5', '08:00:00', '16:00:00');
+CALL P_Insert_OrarAngajatiFaraMedici('1', '6', '08:00:00', '16:00:00');
+CALL P_Insert_OrarAngajatiFaraMedici('1', '7', '08:00:00', '16:00:00');
+CALL P_Insert_OrarAngajatiFaraMedici('1', '8', '08:00:00', '16:00:00');
+CALL P_Insert_OrarAngajatiFaraMedici('1', '9', '08:00:00', '16:00:00');
+CALL P_Insert_OrarAngajatiFaraMedici('1', '10', '08:00:00', '16:00:00');
+select * from OrarAngajatiFaraMedici;
+
+/* 1. idAngajat */
+CALL P_Insert_Concedii('1', '2023-10-10', '2023-10-20');
+CALL P_Insert_Concedii('2', '2023-10-10', '2023-10-20');
+CALL P_Insert_Concedii('3', '2023-05-10', '2023-05-20');
+CALL P_Insert_Concedii('4', '2023-05-10', '2023-05-20');
+CALL P_Insert_Concedii('6', '2023-11-10', '2023-11-20');
+CALL P_Insert_Concedii('7', '2023-12-10', '2023-12-20');
+CALL P_Insert_Concedii('8', '2023-12-10', '2023-12-20');
+CALL P_Insert_Concedii('9', '2023-04-10', '2023-04-20');
+CALL P_Insert_Concedii('10', '2023-04-10', '2023-04-20');
+
+CALL P_Adaugare_In_OrarSpecific('2', 'Galatan', 'Ana', '2023-01-27', '08:00:00', '12:00:00');
+
+CALL P_Insert_Pacienti('Man', 'Cristina', '2222222222222', 'str. George Cosbuc, nr.58, Reghin, jud. Mures', '0735334223');
+CALL P_Insert_Pacienti('Stan', 'Darius', '2222222222223', 'str. George Cosbuc, nr.58, Tg. Mures, jud. Mures', '0735334223');
+CALL P_Insert_Pacienti('Ilovan', 'Mara-Gabriela', '2222222222224', 'str. George Cosbuc, nr.58, Reghin, jud. Mures', '0735334223');
+CALL P_Insert_Pacienti('Andro', 'Ruxandra', '2222222222225', 'str. George Cosbuc, nr.58, Tg. Mures, jud. Mures', '0735334223');
+
+
+/* 1, idPoliclinica, 2. idPacient, 3. idMedic */
+CALL P_Insert_Consultatie('1', 'Man', 'Cristina', '2', '2023-01-05', '11:00:00', "Audiograma", "Timpanograma", "");
+CALL P_Insert_Consultatie('1', 'Man', 'Cristina', '2', '2023-01-24', '11:00:00', "Audiograma", "Timpanograma", "");
+CALL P_Insert_Consultatie('1', 'Stan', 'Darius','2', '2023-01-25', '12:00:00', "Audiograma", "", "");
+CALL P_Insert_Consultatie('1', 'Ilovan', 'Mara-Gabriela','2', '2023-01-25', '13:00:00', "Timpanograma", "", "");
+CALL P_Insert_Consultatie('1', 'Andro', 'Ruxandra','1', '2023-09-10', '15:00:00', "EKG", "Cardiograma", "Test efort");
+/* 20 ian.*/
+CALL P_Insert_Consultatie('1', 'Andro', 'Ruxandra','2', '2023-01-20', '12:00:00', "Audiograma", "Timpanograma", "");
+CALL P_Insert_Consultatie('1', 'Man', 'Cristina','1', '2023-01-20', '13:00:00', "EKG", "", "");
+CALL P_Insert_Consultatie('1', 'Stan', 'Darius','1', '2023-01-20', '14:00:00', "Cardiograma", "", "");
+/* 19 ian */
+CALL P_Insert_Consultatie('1', 'Man', 'Cristina','2', '2023-01-19', '14:00:00', "Audiograma", "", "");
+CALL P_Insert_Consultatie('1', 'Man', 'Cristina','2', '2023-01-19', '13:00:00', "Timpanograma", "", "");
+CALL P_Insert_Consultatie('1', 'Andro', 'Ruxandra','2', '2023-01-19', '15:00:00', "Timpanograma", "", "");
+CALL P_Insert_Consultatie('1', 'Andro', 'Ruxandra','2', '2023-01-19', '10:00:00', "Timpanograma", "", "");

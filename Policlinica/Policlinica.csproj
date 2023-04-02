@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EFD682AA-B442-49EC-B141-2654BACB243A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Policlinica</RootNamespace>
+    <AssemblyName>Policlinica</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MySql.Data, Version=8.0.31.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\MySql.Data.DLL</HintPath>
+    </Reference>
+    <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
+      <HintPath>..\packages\SSH.NET.2016.1.0\lib\net40\Renci.SshNet.dll</HintPath>
+    </Reference>
+    <Reference Include="Renci.SshNet.Async, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Renci.SshNet.Async.1.4.0\lib\net40\Renci.SshNet.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adaugare FunctiiAngajati\AddAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adaugare FunctiiAngajati\AddAdmin.Designer.cs">
+      <DependentUpon>AddAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Adaugare FunctiiAngajati\AddMedic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adaugare FunctiiAngajati\AddMedic.Designer.cs">
+      <DependentUpon>AddMedic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Adaugare FunctiiAngajati\AddAsistent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adaugare FunctiiAngajati\AddAsistent.Designer.cs">
+      <DependentUpon>AddAsistent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Adaugare FunctiiAngajati\AddExpert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adaugare FunctiiAngajati\AddInspector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Adaugare FunctiiAngajati\AddReceptioner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Interfete\IDezautentificare.cs" />
+    <Compile Include="LoginMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginMenu.Designer.cs">
+      <DependentUpon>LoginMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Medic\AdaugareInvestigatii.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Medic\AdaugareInvestigatii.Designer.cs">
+      <DependentUpon>AdaugareInvestigatii.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Medic\CompletareInvestigatii.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Medic\CompletareInvestigatii.Designer.cs">
+      <DependentUpon>CompletareInvestigatii.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Meniuri\MeniuAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Meniuri\MeniuAdmin.Designer.cs">
+      <DependentUpon>MeniuAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Meniuri\MeniuAsistent.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Meniuri\MeniuAsistent.Designer.cs">
+      <DependentUpon>MeniuAsistent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Meniuri\MeniuExpert.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Meniuri\MeniuExpert.Designer.cs">
+      <DependentUpon>MeniuExpert.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Meniuri\MeniuInspector.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Meniuri\MeniuInspector.Designer.cs">
+      <DependentUpon>MeniuInspector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Meniuri\MeniuMedic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Meniuri\MeniuMedic.Designer.cs">
+      <DependentUpon>MeniuMedic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Meniuri\MeniuReceptioner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Meniuri\MeniuReceptioner.Designer.cs">
+      <DependentUpon>MeniuReceptioner.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Meniuri\MeniuSuperAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Meniuri\MeniuSuperAdmin.Designer.cs">
+      <DependentUpon>MeniuSuperAdmin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Adaugare FunctiiAngajati\AddAdmin.resx">
+      <DependentUpon>AddAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Adaugare FunctiiAngajati\AddMedic.resx">
+      <DependentUpon>AddMedic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Adaugare FunctiiAngajati\AddAsistent.resx">
+      <DependentUpon>AddAsistent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Adaugare FunctiiAngajati\AddExpert.resx">
+      <DependentUpon>AddExpert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Adaugare FunctiiAngajati\AddInspector.resx">
+      <DependentUpon>AddInspector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Adaugare FunctiiAngajati\AddReceptioner.resx">
+      <DependentUpon>AddReceptioner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginMenu.resx">
+      <DependentUpon>LoginMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Medic\AdaugareInvestigatii.resx">
+      <DependentUpon>AdaugareInvestigatii.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Medic\CompletareInvestigatii.resx">
+      <DependentUpon>CompletareInvestigatii.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Meniuri\MeniuAdmin.resx">
+      <DependentUpon>MeniuAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Meniuri\MeniuAsistent.resx">
+      <DependentUpon>MeniuAsistent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Meniuri\MeniuExpert.resx">
+      <DependentUpon>MeniuExpert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Meniuri\MeniuInspector.resx">
+      <DependentUpon>MeniuInspector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Meniuri\MeniuMedic.resx">
+      <DependentUpon>MeniuMedic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Meniuri\MeniuReceptioner.resx">
+      <DependentUpon>MeniuReceptioner.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Meniuri\MeniuSuperAdmin.resx">
+      <DependentUpon>MeniuSuperAdmin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Eye.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Imagini\LoginImage.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Stetoscop.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Flaconas.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Medicamente.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Trusa.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Manusi.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Seringa.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Oameni.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Om.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>if exist "$(TargetPath).locked" del "$(TargetPath).locked"
+if exist "$(TargetPath)" if not exist "$(TargetPath).locked" move "$(TargetPath)" "$(TargetPath).locked"</PreBuildEvent>
+  </PropertyGroup>
+</Project>

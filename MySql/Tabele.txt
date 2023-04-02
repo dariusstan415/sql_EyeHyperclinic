@@ -1,0 +1,337 @@
+DROP TABLE IF EXISTS SpecializareMedici;
+
+DROP TABLE IF EXISTS Diagnostice;
+CREATE TABLE IF NOT EXISTS Diagnostice
+(   idDiagnostic Integer PRIMARY KEY AUTO_INCREMENT,
+	Diagnostic varchar(50)
+);
+
+DROP TABLE IF EXISTS RapoarteMedicale;
+CREATE TABLE IF NOT EXISTS RapoarteMedicale
+( 	idRaportMedical Integer PRIMARY KEY auto_increment,
+	idPacient int,
+    FOREIGN KEY (idPacient) REFERENCES Pacienti(idPacient),
+	numePacient varchar(50),
+    prenumePacient varchar(50),
+    idMedic int,
+    FOREIGN KEY (idMedic) REFERENCES Medici(idMedic),
+    numeMedic varchar(50),
+    prenumeMedic varchar(50),
+    idMedicRecomandare int,
+    FOREIGN KEY (idMedicRecomandare) REFERENCES Medici(idMedic),
+    numeMedic_Recomandare varchar(50),
+    prenumeMedic_Recomandare varchar(50),
+    idAsistent int,
+    FOREIGN KEY (idAsistent) REFERENCES AsistentiMedicali(idAsistent),
+    numeAsistent varchar (50),
+    prenumeAsistent varchar (50),
+    dataConsult date,
+    istoric varchar(50),
+    simptome varchar(50),
+    investigatii varchar(50),
+    diagnostic varchar(50),
+    recomandari varchar(50),
+    parafa varchar(30)
+);
+
+DROP TABLE IF EXISTS ManyToManyInvestigatieServiciuRezultat;
+CREATE TABLE IF NOT EXISTS ManyToManyInvestigatieServiciuRezultat
+(   idRaportMedical int,
+	FOREIGN KEY (idRaportMedical) REFERENCES RapoarteMedicale(idRaportMedical),
+    idServiciuMedical int,
+    FOREIGN KEY (idServiciuMedical) REFERENCES ServiciiMedicale(idServiciuMedical),
+    rezultat varchar(100)
+);
+
+DROP TABLE IF EXISTS Pacienti;
+CREATE TABLE IF NOT EXISTS Pacienti
+(   idPacient Integer PRIMARY KEY auto_increment,
+    Nume varchar(50),
+    Prenume varchar(50),
+    CNP varchar(50),
+    Adresa varchar(50),
+    Nr_telefon varchar(50)
+);
+
+DROP TABLE IF EXISTS Consultatie;
+CREATE TABLE IF NOT EXISTS Consultatie
+(   idPoliclinica int,
+	FOREIGN KEY (idPoliclinica) REFERENCES Policlinici(idPoliclinica),
+	idConsultatie Integer PRIMARY KEY auto_increment,
+	idPacient int,
+    nume varchar(30),
+    prenume varchar(30),
+    FOREIGN KEY (idPacient) REFERENCES Pacienti(idPacient),
+    idMedic int,
+    FOREIGN KEY (idMedic) REFERENCES Medici(idMedic),
+    dataConsult date,
+    oraConsult time,
+    inregistrat int
+);
+
+DROP TABLE IF EXISTS ManyToManyConsultatieServicii;
+CREATE TABLE IF NOT EXISTS ManyToManyConsultatieServicii
+(	idConsultatie int,
+	FOREIGN KEY (idConsultatie) REFERENCES Consultatie(idConsultatie),
+    idServiciuMedical int,
+	FOREIGN KEY (idServiciuMedical) REFERENCES ServiciiMedicale(idServiciuMedical),
+    nrServiciu int
+);
+
+DROP TABLE IF EXISTS Saptamana;
+CREATE TABLE IF NOT EXISTS Saptamana
+( 	idProgramFunctionare Integer PRIMARY KEY,
+	Luni varchar(50),
+    Marti varchar(50),
+    Miercuri varchar(50), 
+    Joi varchar(50),
+    Vineri varchar(50),
+    Sambata varchar(50),
+    Duminica varchar(50));
+
+DROP TABLE IF EXISTS Policlinici;
+CREATE TABLE IF NOT EXISTS Policlinici
+( 	idPoliclinica Integer PRIMARY KEY AUTO_INCREMENT,
+	Denumire varchar(50),
+    Adresa varchar(50),
+    idProgramFunctionare int,
+    FOREIGN KEY (idProgramFunctionare) REFERENCES Saptamana(idProgramFunctionare)
+);
+
+DROP TABLE IF EXISTS ServiciiMedicale;
+CREATE TABLE IF NOT EXISTS ServiciiMedicale
+( 	idServiciuMedical Integer PRIMARY KEY AUTO_INCREMENT,
+	Denumire varchar(50),
+    Specialitatea varchar(50),
+    CompetentaMedic varchar(50),
+    Pret int,
+    Durata varchar(50)
+);
+
+DROP TABLE IF EXISTS ManyToManyPolicliniciServicii;
+CREATE TABLE IF NOT EXISTS ManyToManyPolicliniciServicii
+(	idPoliclinica int,
+	FOREIGN KEY (idPoliclinica) REFERENCES Policlinici(idPoliclinica),
+    idServiciuMedical int,
+	FOREIGN KEY (idServiciuMedical) REFERENCES ServiciiMedicale(idServiciuMedical)
+);
+    
+DROP TABLE IF EXISTS Departamente;
+CREATE TABLE IF NOT EXISTS Departamente
+( 	idDepartament Integer PRIMARY KEY,
+	Departament varchar(50));
+
+DROP TABLE IF EXISTS Functii;
+CREATE TABLE IF NOT EXISTS Functii
+( 	idFunctie Integer PRIMARY KEY,
+	Functie varchar(50),
+	idDepartament int,
+	FOREIGN KEY (idDepartament) REFERENCES Departamente(idDepartament)
+);
+
+DROP TABLE IF EXISTS Angajati;
+CREATE TABLE IF NOT EXISTS Angajati
+(   idAngajat Integer PRIMARY KEY auto_increment,
+	idUtilizator int,
+    FOREIGN KEY (idUtilizator) REFERENCES Utilizatori(idUtilizator),
+	idPoliclinica int,
+	FOREIGN KEY (idPoliclinica) REFERENCES Policlinici(idPoliclinica),
+	SalariuNegociat int,  /* A devenit double dupa un alter. */
+	NumarOre int,
+	idFunctie int,
+    FOREIGN KEY (idFunctie) REFERENCES Functii(idFunctie)
+    /* + salariu Actual si oreActuale */
+);
+
+DROP TABLE IF EXISTS Utilizatori;
+CREATE TABLE IF NOT EXISTS Utilizatori
+(   idUtilizator Integer PRIMARY KEY AUTO_INCREMENT,
+	idPoliclinica int,
+    FOREIGN KEY (idPoliclinica) REFERENCES Policlinici(idPoliclinica),
+	CNP varchar(50),
+    nume varchar(50),
+    prenume varchar(50),
+    adresa varchar(50),
+    nr_telefon varchar(50),
+    email varchar(50),
+    IBAN varchar(50),
+    nr_contract varchar(50),
+    data_angajarii varchar(50),
+    idFunctie int,
+    FOREIGN KEY (idFunctie) REFERENCES Functii(idFunctie)
+);
+
+DROP TABLE TipAsistent;
+CREATE TABLE IF NOT EXISTS TipAsistent
+( 	idTip Integer PRIMARY KEY,
+	Tip varchar(50));
+    
+DROP TABLE GradAsistent;
+CREATE TABLE IF NOT EXISTS GradAsistent
+( idGrad Integer PRIMARY KEY,
+  Grad varchar(50));
+  
+DROP TABLE AsistentiMedicali;
+CREATE TABLE IF NOT EXISTS AsistentiMedicali
+(   idAsistent Integer PRIMARY KEY AUTO_INCREMENT,
+	idAngajat int,
+    FOREIGN KEY (idAngajat) REFERENCES Angajati(idAngajat),
+	idTip int,
+    FOREIGN KEY (idTip) REFERENCES TipAsistent(idTip),
+	idGrad int,
+    FOREIGN KEY (idGrad) REFERENCES GradAsistent(idGrad)
+);
+
+DROP TABLE SpecializareMedici;
+CREATE TABLE IF NOT EXISTS SpecializareMedici
+ (	idSpecializare Integer PRIMARY KEY AUTO_INCREMENT,
+	Specializare varchar(50));
+
+DROP TABLE IF EXISTS Medici;
+CREATE TABLE IF NOT EXISTS Medici 
+(   idMedic Integer PRIMARY KEY AUTO_INCREMENT,
+	idAngajat int,
+    FOREIGN KEY (idAngajat) REFERENCES Angajati(idAngajat),
+	Grad varchar(50),
+	CodParafa varchar(50),
+	TitluStiintific varchar(50),
+	PostDidactic varchar(50),
+    Comision int
+);
+
+DROP TABLE IF EXISTS ManyToManyMediciSpecializari;
+CREATE TABLE IF NOT EXISTS ManyToManyMediciSpecializari
+(	idMedic int,
+	FOREIGN KEY (idMedic) REFERENCES Medici(idMedic),
+    idSpecializare int,
+	FOREIGN KEY (idSpecializare) REFERENCES SpecializareMedici(idSpecializare),
+    specializare varchar (50),
+    gradMedic varchar(50),
+    idServiciu int,
+    denumireServiciu varchar(50),
+    pretServiciu int,
+    durataServiciu varchar(50)
+);
+
+DROP TABLE IF EXISTS SalariiAngajati;
+CREATE TABLE IF NOT EXISTS SalariiAngajati
+(	idUtilizator int,
+	idAngajat int,
+	luna varchar(30),
+    salariu int
+);
+
+DROP TABLE IF EXISTS AnalizePacienti;
+CREATE TABLE IF NOT EXISTS AnalizePacienti
+(	idPacient int,
+	analiza varchar(30),
+    rezultat varchar(10)
+);
+
+DROP TABLE OrarMedici;  
+CREATE TABLE IF NOT EXISTS OrarMedici
+( 
+	idPoliclinica int,
+	idPacient int,
+    FOREIGN KEY (idPacient) REFERENCES Pacienti(idPacient),
+    numePacient varchar(30),
+    prenumePacient varchar(30),
+    idMedic int,
+    FOREIGN KEY (idMedic) REFERENCES Medici(idMedic),
+    numeMedic varchar(30),
+    prenumeMedic varchar(30),
+    dataConsult date,
+    oraConsult time,
+    inregistrat int
+);
+
+DROP TABLE OrarAngajatiFaraMedici;
+CREATE TABLE IF NOT EXISTS OrarAngajatiFaraMedici
+( 
+	idPoliclinica int,
+	idAngajat int,
+    FOREIGN KEY (idAngajat) REFERENCES Angajati(idAngajat),
+    numeAngajat varchar(30),
+    prenumeAngajat varchar(30),
+    oraInceput time,
+    oraSfarsit time
+);
+
+DROP TABLE IF EXISTS Concedii;
+CREATE TABLE IF NOT EXISTS Concedii
+( 
+	idConcediu Integer PRIMARY KEY AUTO_INCREMENT,
+	idAngajat int,
+    FOREIGN KEY (idAngajat) REFERENCES Angajati(idAngajat),
+    numeAngajat varchar(30),
+    prenumeAngajat varchar(30),
+    dataInceput date,
+    dataSfarsit date
+);
+
+DROP TABLE OrarSpecific;
+CREATE TABLE IF NOT EXISTS OrarSpecific
+( 
+	idAngajat int,
+    numeAngajat varchar(30),
+    prenumeAngajat varchar (30),
+	dataSpecifica date,
+	oraInceput time,
+    oraSfarsit time
+);
+
+DROP TABLE IF EXISTS ProfitPerMonth;
+CREATE TABLE IF NOT EXISTS ProfitPerMonth
+(   idPoliclinica int,
+	FOREIGN KEY (idPoliclinica) REFERENCES Policlinici(idPoliclinica),
+    luna varchar(30),
+    venit int,
+    cheltuieli int,
+    profit int
+);
+
+DROP TABLE IF EXISTS RaportMedici;
+CREATE TABLE IF NOT EXISTS RaportMedici
+(	idMedic int,
+	FOREIGN KEY (idMedic) REFERENCES Medici(idMedic),
+    luna varchar(30),
+    sumSalariu int,
+    /*salariul se calculeaza cu regula de trei splia in comp cu nr de ore si salariul negocial din Medici
+    sum_comision reprezinta banii castigti din comisionul medicului*/
+    sumComision int,
+    sumTotal int
+);
+
+DROP TABLE IF EXISTS RaportSpecializari;
+CREATE TABLE IF NOT EXISTS RaportSpecializari
+(	idSpecializare int,
+	FOREIGN KEY (idSpecializare) REFERENCES SpecializareMedici(idSpecializare),
+    luna varchar(30),
+    sumTotal int
+);
+
+DROP TABLE IF EXISTS Cabinete;
+CREATE TABLE IF NOT EXISTS Cabinete
+( 	idCabinet Integer PRIMARY KEY auto_increment,
+	numeCabinet varchar(30),
+	idPoliclinica int,
+    FOREIGN KEY (idPoliclinica) REFERENCES Policlinici(idPoliclinica)
+);
+
+
+DROP TABLE IF EXISTS ManyToManyCabinetLiber;
+CREATE TABLE IF NOT EXISTS ManyToManyCabinetLiber
+( 	idCabinet int,
+	FOREIGN KEY (idCabinet) REFERENCES Cabinete(idCabinet),
+	dataConsult date,
+    oraConsult time
+);
+
+DROP TABLE IF EXISTS ManyToManyCabineteServiciiMedicale;
+CREATE TABLE IF NOT EXISTS ManyToManyCabineteServiciiMedicale
+( 	idCabinet int,
+	FOREIGN KEY (idCabinet) REFERENCES Cabinete(idCabinet),
+	idServiciuMedical int,
+    FOREIGN KEY (idServiciuMedical) REFERENCES ServiciiMedicale(idServiciuMedical),
+    nrServiciu int
+);

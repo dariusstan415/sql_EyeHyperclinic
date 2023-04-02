@@ -1,0 +1,705 @@
+DROP PROCEDURE IF EXISTS P_Insert_Departament;
+DELIMITER //
+CREATE procedure P_Insert_Departament (idDepartament int, Departament varchar(50))
+BEGIN
+	INSERT INTO Departamente( idDepartament, Departament )
+	VALUES ( idDepartament, Departament );
+END 
+// DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_Functie;
+DELIMITER //
+CREATE procedure P_Insert_Functie (idFunctie int, Functie varchar(50), idDepartament int)
+BEGIN
+	INSERT INTO Functii( idFunctie, Functie, idDepartament )
+	VALUES ( idFunctie, Functie, idDepartament );
+END 
+// DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_Utilizatori;
+DELIMITER //
+CREATE procedure P_Insert_Utilizatori ( idPoliclinica int,
+										CNP varchar(50),
+										nume varchar(50),
+										prenume varchar(50),
+										adresa varchar(50),
+                                        nr_telefon varchar(50),
+                                        email varchar(50),
+                                        IBAN varchar(50),
+										nr_contract varchar(50),
+										data_angajarii varchar(50),
+										idFunctie int
+										)
+BEGIN
+	INSERT INTO Utilizatori (idPoliclinica,
+						CNP,
+						nume,
+						prenume,
+						adresa,
+						nr_telefon,
+                        email,
+						IBAN,
+						nr_contract,
+						data_angajarii,
+						idFunctie
+						)
+	VALUES (
+						idPoliclinica,
+						CNP,
+						nume,
+						prenume,
+						adresa,
+						nr_telefon,
+                        email,
+						IBAN,
+						nr_contract,
+						data_angajarii,
+						idFunctie
+		);
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_SpecializareMedici;
+DELIMITER //
+CREATE procedure P_Insert_SpecializareMedici (Specializare varchar(50))
+BEGIN
+	INSERT INTO SpecializareMedici( Specializare )
+	VALUES ( Specializare );
+END 
+// DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_Angajati;
+DELIMITER //
+CREATE procedure P_Insert_Angajati ( idPoliclinica int, NumarOre int, idFunctie int, SalariuNegociat int )
+BEGIN
+	DECLARE luna varchar(30);
+    DECLARE data_angajarii date;
+	DECLARE idUtilizatorNOU int;
+    DECLARE idAngajatNOU int;
+	SELECT MAX(Utilizatori.idUtilizator) INTO idUtilizatorNOU FROM Utilizatori;
+	SELECT Utilizatori.data_angajarii INTO data_angajarii FROM Utilizatori WHERE Utilizatori.idUtilizator = idUtilizatorNOU;
+    
+	INSERT INTO Angajati( idUtilizator, idPoliclinica, NumarOre, idFunctie, SalariuNegociat )
+	VALUES ( idUtilizatorNOU, idPoliclinica, NumarOre, idFunctie, SalariuNegociat );
+
+	SELECT MONTH(data_angajarii) INTO luna;
+
+	UPDATE ProfitPerMonth
+	SET ProfitPerMonth.cheltuieli = ProfitPerMonth.cheltuieli + SalariuNegociat
+	WHERE ProfitPerMonth.idPoliclinica = idPoliclinica
+	AND ProfitPerMonth.luna >= luna;  
+    
+    SELECT MAX(Angajati.idAngajat) INTO idAngajatNOU FROM Angajati;
+        INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '1', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '2', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '3', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '4', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '5', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '6', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '7', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '8', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '9', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '10', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '11', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '12', SalariuNegociat);
+    
+		UPDATE ProfitPerMonth
+        SET ProfitPerMonth.cheltuieli = ProfitPerMonth.cheltuieli + SalariuNegociat, 
+        ProfitPerMonth.profit = ProfitPerMonth.venit - ProfitPerMonth.cheltuieli
+        WHERE ProfitPerMonth.idPoliclinica = idPoliclinica
+        AND ProfitPerMonth.luna = luna;
+END 
+// DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_Medici;
+DELIMITER //
+CREATE procedure P_Insert_Medici (
+								idPoliclinica int,
+								NumarOre int,
+								idFunctie int,
+								SalariuNegociat int,
+								Grad varchar(50),
+								CodParafa varchar(50),
+								TitluStiintific varchar(50),
+                                PostDidactic varchar(50),
+                                Comision int
+								)
+BEGIN
+
+DECLARE idAngajatNOU int;
+DECLARE idUtilizatorNOU int;
+SELECT MAX(Utilizatori.idUtilizator) INTO idUtilizatorNOU FROM Utilizatori;
+	INSERT INTO Angajati(idUtilizator,
+						idPoliclinica,
+						  NumarOre,
+                          idFunctie,
+                          SalariuNegociat
+						)
+	VALUES (idUtilizatorNOU,
+			idPoliclinica,
+			NumarOre,
+		    idFunctie,
+		    SalariuNegociat);
+            
+SELECT MAX(Angajati.idAngajat) INTO idAngajatNOU FROM Angajati;
+
+	INSERT INTO Medici ( idAngajat, Grad, CodParafa, TitluStiintific, PostDidactic, Comision )
+	VALUES ( idAngajatNOU, Grad, CodParafa, TitluStiintific, PostDidactic, Comision );
+
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_Asistenti;
+DELIMITER //
+CREATE procedure P_Insert_Asistenti (
+								idPoliclinica int,
+								NumarOre int,
+								idFunctie int,
+								SalariuNegociat int,
+								idTip int,
+								idGrad int
+								)
+	BEGIN
+	DECLARE luna varchar(30);
+	DECLARE idAngajatNOU int;
+	DECLARE salariuNegociatNOU int;
+	DECLARE idUtilizatorNOU int;
+	DECLARE data_angajarii date;
+	SELECT MAX(Utilizatori.idUtilizator) INTO idUtilizatorNOU FROM Utilizatori;
+	SELECT Utilizatori.data_angajarii INTO data_angajarii FROM Utilizatori WHERE Utilizatori.idUtilizator = idUtilizatorNOU;
+
+	INSERT INTO Angajati( idUtilizator, idPoliclinica, NumarOre, idFunctie, SalariuNegociat )
+	VALUES ( idUtilizatorNOU, idPoliclinica, NumarOre, idFunctie, SalariuNegociat );
+            
+	SELECT MAX(Angajati.idAngajat) INTO idAngajatNOU FROM Angajati; 
+	SELECT MONTH(data_angajarii) INTO luna;
+
+	UPDATE ProfitPerMonth
+	SET ProfitPerMonth.cheltuieli = ProfitPerMonth.cheltuieli + SalariuNegociat
+	WHERE ProfitPerMonth.idPoliclinica = idPoliclinica
+	AND ProfitPerMonth.luna >= luna;
+
+	INSERT INTO AsistentiMedicali (	idAngajat,
+							idTip,
+							idGrad)
+	VALUES (	idAngajatNOU,
+				idTip,
+				idGrad
+			);
+        
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '1', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '2', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '3', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '4', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '5', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '6', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '7', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '8', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '9', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '10', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '11', SalariuNegociat);
+    INSERT INTO SalariiAngajati(idUtilizator, idAngajat, luna, salariu)
+    VALUES (idUtilizatorNOU, idAngajatNOU, '12', SalariuNegociat);
+    
+		UPDATE ProfitPerMonth
+        SET ProfitPerMonth.cheltuieli = ProfitPerMonth.cheltuieli + SalariuNegociat, 
+        ProfitPerMonth.profit = ProfitPerMonth.venit - ProfitPerMonth.cheltuieli
+        WHERE ProfitPerMonth.idPoliclinica = idPoliclinica
+        AND ProfitPerMonth.luna = luna;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_GradAsistent;
+DELIMITER //
+CREATE procedure P_Insert_GradAsistent (idGrad int, Grad varchar(50))
+BEGIN
+	INSERT INTO GradAsistent( idGrad, Grad )
+	VALUES ( idGrad, Grad );
+END 
+// DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_TipAsistent;
+DELIMITER //
+CREATE procedure P_Insert_TipAsistent (idTip int, Tip varchar(50))
+BEGIN
+	INSERT INTO TipAsistent( idTip, Tip )
+	VALUES ( idTip, Tip );
+END 
+// DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_Consultatie;
+DELIMITER //
+CREATE procedure P_Insert_Consultatie (idPoliclinica int, nume varchar(30), prenume varchar(30), idMedic int, dataConsult date, oraConsult time,
+									    serviciu_1 varchar(30), serviciu_2 varchar(30), serviciu_3 varchar(30))
+BEGIN
+	DECLARE numeMedic varchar(30);
+    DECLARE prenumeMedic varchar(30);
+    DECLARE idAngajat int;
+    DECLARE idUtilizator int;
+    DECLARE idServiciuMedical int;
+    DECLARE idConsultatie int;
+    DECLARE idPacient int;
+    
+    SELECT Pacienti.idPacient INTO idPacient FROM Pacienti WHERE Pacienti.Nume = nume AND Pacienti.Prenume = prenume;
+    SELECT Medici.idAngajat INTO idAngajat FROM Medici WHERE idMedic = Medici.idMedic;
+    SELECT Angajati.idUtilizator INTO idUtilizator FROM Angajati WHERE Angajati.idAngajat = idAngajat;
+    SELECT Utilizatori.nume INTO numeMedic FROM Utilizatori WHERE idUtilizator = Utilizatori.idUtilizator;
+    SELECT Utilizatori.prenume INTO prenumeMedic FROM Utilizatori WHERE idUtilizator = Utilizatori.idUtilizator;
+
+	INSERT INTO Consultatie( idPoliclinica, idPacient, nume, prenume, idMedic, dataConsult, oraConsult )
+	VALUES ( idPoliclinica, idPacient, nume, prenume, idMedic, dataConsult, oraConsult);        
+    
+    INSERT INTO OrarMedici( idPoliclinica, idPacient, numePacient, prenumePacient, idMedic, numeMedic, prenumeMedic, dataConsult, oraConsult )
+	VALUES ( idPoliclinica, idPacient, nume, prenume, idMedic, numeMedic, prenumeMedic, dataConsult, oraConsult);
+    
+            SELECT Consultatie.idConsultatie INTO idConsultatie FROM Consultatie WHERE Consultatie.idPacient = idPacient 
+									AND Consultatie.idMedic = idMedic AND Consultatie.dataConsult = dataConsult 
+                                    AND Consultatie.oraConsult = oraConsult;
+    
+    IF (serviciu_1 != "") THEN
+		SELECT ServiciiMedicale.idServiciuMedical INTO idServiciuMedical FROM ServiciiMedicale WHERE serviciu_1 = ServiciiMedicale.Denumire;
+		INSERT INTO ManyToManyConsultatieServicii( idConsultatie, idServiciuMedical, nrServiciu )
+		VALUES ( idConsultatie, idServiciuMedical, '1' );
+	END IF;
+    
+    IF (serviciu_2 != "") THEN
+		SELECT ServiciiMedicale.idServiciuMedical INTO idServiciuMedical FROM ServiciiMedicale WHERE serviciu_2 = ServiciiMedicale.Denumire;
+		INSERT INTO ManyToManyConsultatieServicii( idConsultatie, idServiciuMedical, nrServiciu  )
+		VALUES ( idConsultatie, idServiciuMedical, '2' );
+	END IF;
+    
+    IF (serviciu_3 != "") THEN
+		SELECT ServiciiMedicale.idServiciuMedical INTO idServiciuMedical FROM ServiciiMedicale WHERE serviciu_3 = ServiciiMedicale.Denumire;
+		INSERT INTO ManyToManyConsultatieServicii( idConsultatie, idServiciuMedical, nrServiciu  )
+		VALUES ( idConsultatie, idServiciuMedical, '3' );
+	END IF;
+END 
+// DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_Policlinici;
+DELIMITER //
+CREATE procedure P_Insert_Policlinici (Denumire varchar(50), Adresa varchar(50), idProgramFunctionare int )
+BEGIN
+	INSERT INTO Policlinici(Denumire, Adresa, idProgramFunctionare )
+	VALUES (Denumire, Adresa, idProgramFunctionare );
+END 
+// DELIMITER ;
+
+DELIMITER //
+CREATE procedure P_Insert_Diagnostic (Diagnostic varchar(50))
+BEGIN
+	INSERT INTO Diagnostice( Diagnostic )
+	VALUES ( Diagnostic );
+END 
+// DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Creare_Raport_Medical;
+DELIMITER //
+CREATE procedure P_Creare_Raport_Medical (idPacient int,
+										numePacient varchar(50),
+										prenumePacient varchar(50),
+										numeMedic varchar(50),
+										prenumeMedic varchar(50),
+										numeMedic_Recomandare varchar(50),
+										prenumeMedic_Recomandare varchar(50),
+                                        numeAsistent varchar(50),
+										prenumeAsistent varchar(50),
+										dataConsult DATE, 
+                                        simptome varchar(30))
+BEGIN
+DECLARE idUtilizator int;
+DECLARE idAngajat int;
+DECLARE idMedic int;
+DECLARE idMedicRecomandare int;
+DECLARE idAsistent int;
+
+SELECT Utilizatori.idUtilizator INTO idUtilizator FROM Utilizatori WHERE Utilizatori.nume = numeMedic AND Utilizatori.prenume  = prenumeMedic;
+SELECT Angajati.idAngajat INTO idAngajat FROM Angajati WHERE Angajati.idUtilizator = idUtilizator;
+SELECT Medici.idMedic INTO idMedic FROM Medici WHERE Medici.idAngajat = idAngajat;
+
+SELECT Utilizatori.idUtilizator INTO idUtilizator FROM Utilizatori WHERE Utilizatori.nume = numeMedic_Recomandare AND Utilizatori.prenume  = prenumeMedic_Recomandare;
+SELECT Angajati.idAngajat INTO idAngajat FROM Angajati WHERE Angajati.idUtilizator = idUtilizator;
+SELECT Medici.idMedic INTO idMedicRecomandare FROM Medici WHERE Medici.idAngajat = idAngajat;
+
+SELECT Utilizatori.idUtilizator INTO idUtilizator FROM Utilizatori WHERE Utilizatori.nume = numeAsistent AND Utilizatori.prenume = prenumeAsistent;
+SELECT Angajati.idAngajat INTO idAngajat FROM Angajati WHERE Angajati.idUtilizator = idUtilizator;
+SELECT AsistentiMedicali.idAsistent INTO idAsistent FROM AsistentiMedicali WHERE AsistentiMedicali.idAngajat = idAngajat;
+
+	INSERT INTO RapoarteMedicale(idPacient,
+								numePacient,
+								prenumePacient,
+                                idMedic,
+								numeMedic,
+								prenumeMedic,
+                                idMedicRecomandare,
+								numeMedic_Recomandare,
+								prenumeMedic_Recomandare,
+                                idAsistent,
+								numeAsistent,
+								prenumeAsistent,
+								dataConsult,
+                                simptome)
+	VALUES (idPacient,
+			numePacient,
+			prenumePacient,
+			idMedic,
+			numeMedic,
+			prenumeMedic,
+			idMedicRecomandare,
+			numeMedic_Recomandare,
+			prenumeMedic_Recomandare,
+			idAsistent,
+			numeAsistent,
+			prenumeAsistent,
+			dataConsult,
+            simptome);
+END 
+// DELIMITER ;
+          
+DROP PROCEDURE IF EXISTS P_Insert_ManyToManyInvestigatieServiciuRezultat
+DELIMITER //
+CREATE procedure P_Insert_ManyToManyInvestigatieServiciuRezultat(idServiciuMedical int)
+BEGIN
+	DECLARE idRaportMedical int;
+	SELECT MAX(RapoarteMedicale.idRaportMedical) INTO idRaportMedical FROM RapoarteMedicale; 
+    
+	INSERT INTO ManyToManyInvestigatieServiciuRezultat(idRaportMedical, idServiciuMedical)
+    VALUES(idRaportMedical, idServiciuMedical);
+
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_AdaugareRezultat
+DELIMITER //
+CREATE procedure P_Insert_AdaugareRezultat(idServiciuMedical int, rezultat varchar(100))
+BEGIN
+	DECLARE idRaportMedical int;
+	SELECT MAX(RapoarteMedicale.idRaportMedical) INTO idRaportMedical FROM RapoarteMedicale; 
+    
+	UPDATE ManyToManyInvestigatieServiciuRezultat
+    SET ManyToManyInvestigatieServiciuRezultat.rezultat = rezultat
+    WHERE ManyToManyInvestigatieServiciuRezultat.idServiciuMedical = idServiciuMedical
+    AND ManyToManyInvestigatieServiciuRezultat.idRaportMedical = idRaportMedical;
+
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_AdaugareDiagnosticRecomandari
+DELIMITER //
+CREATE procedure P_Insert_AdaugareDiagnosticRecomandari(diagnostic varchar(50), recomandari varchar(50), parafa varchar(30))
+BEGIN
+	DECLARE idRaportMedical int;
+	SELECT MAX(RapoarteMedicale.idRaportMedical) INTO idRaportMedical FROM RapoarteMedicale; 
+    
+	UPDATE RapoarteMedicale
+    SET RapoarteMedicale.diagnostic = diagnostic, RapoarteMedicale.recomandari = recomandari, RapoarteMedicale.parafa = parafa
+    WHERE RapoarteMedicale.idRaportMedical = idRaportMedical;
+
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_AnalizePacienti
+DELIMITER //
+CREATE procedure P_Insert_AnalizePacienti(idPacient int, analiza varchar(30), rezultat varchar(10))
+BEGIN
+
+	INSERT INTO AnalizePacienti (idPacient, analiza, rezultat)
+    VALUES(idPacient, analiza, rezultat);
+
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE procedure P_Insert_Pacienti ( Nume varchar(50), Prenume varchar(50), CNP varchar(50),  Adresa varchar(50), Nr_telefon varchar(50) )
+BEGIN
+	INSERT INTO Pacienti ( Nume, Prenume, CNP, Adresa, Nr_telefon )
+	VALUES ( Nume, Prenume, CNP, Adresa, Nr_telefon );
+    
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_OrarAngajatiFaraMedici
+DELIMITER //
+CREATE procedure P_Insert_OrarAngajatiFaraMedici ( idPoliclinica int, idAngajat int, oraInceput time, oraSfarsit time )
+BEGIN
+	DECLARE numeAngajat varchar(30);
+    DECLARE prenumeAngajat varchar(30);
+    DECLARE idUtilizator int;
+    
+	SELECT Angajati.idUtilizator INTO idUtilizator FROM Angajati WHERE Angajati.idAngajat = idAngajat;
+    SELECT Utilizatori.nume INTO numeAngajat FROM Utilizatori WHERE idUtilizator = Utilizatori.idUtilizator;
+    SELECT Utilizatori.prenume INTO prenumeAngajat FROM Utilizatori WHERE idUtilizator = Utilizatori.idUtilizator;
+    
+	INSERT INTO OrarAngajatiFaraMedici (
+						idPoliclinica,
+						idAngajat,
+                        numeAngajat,
+                        prenumeAngajat,
+				        oraInceput,
+					    oraSfarsit
+						)
+	VALUES (			idPoliclinica,
+						idAngajat,
+                        numeAngajat,
+                        prenumeAngajat,
+				        oraInceput,
+					    oraSfarsit
+			);
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_Concedii
+DELIMITER //
+CREATE procedure P_Insert_Concedii ( idAngajat int, dataInceput date, dataSfarsit date )
+BEGIN
+	DECLARE numeAngajat varchar(30);
+    DECLARE prenumeAngajat varchar(30);
+    DECLARE idUtilizator int;
+    
+    SELECT Angajati.idUtilizator INTO idUtilizator FROM Angajati WHERE Angajati.idAngajat = idAngajat;
+    SELECT Utilizatori.nume INTO numeAngajat FROM Utilizatori WHERE idUtilizator = Utilizatori.idUtilizator;
+    SELECT Utilizatori.prenume INTO prenumeAngajat FROM Utilizatori WHERE idUtilizator = Utilizatori.idUtilizator;
+    
+	INSERT INTO Concedii ( idAngajat, numeAngajat, prenumeAngajat, dataInceput, dataSfarsit )
+	VALUES ( idAngajat, numeAngajat, prenumeAngajat, dataInceput, dataSfarsit );
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_OrarSpecific
+DELIMITER //
+CREATE procedure P_Insert_OrarSpecific ( idAngajat int, dataSpecifica date, oraInceput time, oraSfarsit time )
+BEGIN
+	DECLARE numeAngajat varchar(30);
+    DECLARE prenumeAngajat varchar(30);
+    DECLARE idUtilizator int;
+    
+    SELECT Angajati.idUtilizator INTO idUtilizator FROM Angajati WHERE Angajati.idAngajat = idAngajat;
+    SELECT Utilizatori.nume INTO numeAngajat FROM Utilizatori WHERE idUtilizator = Utilizatori.idUtilizator;
+    SELECT Utilizatori.prenume INTO prenumeAngajat FROM Utilizatori WHERE idUtilizator = Utilizatori.idUtilizator;
+    
+	INSERT INTO OrarSpecific ( idAngajat, numeAngajat, prenumeAngajat, dataSpecifica, oraInceput, oraSfarsit
+						)
+	VALUES ( idAngajat, numeAngajat, prenumeAngajat, dataSpecifica, oraInceput, oraSfarsit
+			);
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_ProgramFunctionare
+DELIMITER //
+CREATE procedure P_Insert_ProgramFunctionare ( idProgramFunctionare int, zi varchar(30) )
+BEGIN
+	INSERT INTO Saptamana ( idProgramFunctionare, Luni, Marti, Miercuri,  Joi, Vineri, Sambata, Duminica )
+	VALUES ( idProgramFunctionare, zi, zi, zi, zi, zi, zi, zi );
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_ServiciuMedical
+DELIMITER //
+CREATE procedure P_Insert_ServiciuMedical ( Denumire varchar(50),
+											Specialitatea varchar(50),
+											CompetentaMedic varchar(50),
+											Pret int,
+											Durata varchar(50) )
+BEGIN
+	INSERT INTO ServiciiMedicale ( Denumire, Specialitatea, CompetentaMedic, Pret, Durata )
+	VALUES ( Denumire, Specialitatea, CompetentaMedic, Pret, Durata );
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Pacient_Inregistrat
+DELIMITER //
+CREATE procedure P_Pacient_Inregistrat ( CNP varchar(50), oraSosirii time, dataSosirii date )
+BEGIN
+    
+	DECLARE idPacient int;
+	SELECT Pacienti.idPacient INTO idPacient FROM Pacienti WHERE Pacienti.CNP = CNP;
+    
+	UPDATE Consultatie SET inregistrat = '1' 
+		WHERE Consultatie.idPacient = idPacient
+        AND Consultatie.dataConsult = dataSosirii
+        AND Consultatie.oraConsult = oraSosirii;
+        
+	UPDATE OrarMedici SET inregistrat = '1'
+		WHERE OrarMedici.idPacient = idPacient
+        AND OrarMedici.dataConsult = dataSosirii
+        AND OrarMedici.oraConsult = oraSosirii;
+        
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Stergere_Utilizator
+DELIMITER //
+CREATE procedure P_Stergere_Utilizator ( idUtilizator int)
+BEGIN
+	DECLARE azi int;
+	DECLARE idAngajat int;
+    DECLARE idMedic int;
+    DECLARE idFunctie int;
+    DECLARE idConsultatie int;
+    DECLARE idPoliclinica int;
+    DECLARE salariu int;
+	SELECT Angajati.idAngajat INTO idAngajat FROM Angajati WHERE Angajati.idUtilizator = idUtilizator;
+	SELECT Angajati.idFunctie INTO idFunctie FROM Angajati WHERE Angajati.idUtilizator = idUtilizator;
+    SELECT Angajati.SalariuNegociat INTO salariu FROM Angajati WHERE Angajati.idUtilizator = idUtilizator;
+    SELECT Utilizatori.idPoliclinica INTO idPoliclinica FROM Utilizatori WHERE Utilizatori.idUtilizator = idUtilizator;
+    
+	DELETE FROM Utilizatori WHERE Utilizatori.idUtilizator = idUtilizator;
+    DELETE FROM Angajati WHERE Angajati.idUtilizator = idUtilizator;
+    DELETE FROM Concedii WHERE Concedii.idAngajat = idAngajat;
+	DELETE FROM OrarAngajatiFaraMedici WHERE OrarAngajatiFaraMedici.idAngajat = idAngajat;
+    
+    IF idFunctie = '5' THEN
+		SELECT Medici.idMedic INTO idMedic FROM Medici WHERE Medici.idAngajat = idAngajat;
+        SELECT Consultatie.idConsultatie FROM Consultatie WHERE Consultatie.idMedic = idMedic;
+		DELETE FROM OrarMedici WHERE OrarMedici.idMedic = idMedic;
+        DELETE FROM RaportMedici WHERE RaportMedici.idMedic = idMedic;
+        DELETE FROM Consultatie WHERE Consultatie.idMedic = idMedic;
+        DELETE FROM Medici WHERE Medici.idMedic = idMedic;
+        DELETE FROM manytomanyconsultatieservicii WHERE manytomanyconsultatieservicii.idConsultatie = idConsultatie;
+		DELETE FROM manytomanymedicispecializari WHERE manytomanymedicispecializari.idMedic = idMedic;
+	END IF;
+    
+    IF idFunctie = '4' THEN
+        DELETE FROM AsistentiMedicali WHERE AsistentiMedicali.idAngajat = idAngajat;
+	END IF;
+    
+    SELECT MONTH(current_date()) INTO azi;
+    
+		UPDATE ProfitPerMonth
+        SET ProfitPerMonth.cheltuieli = ProfitPerMonth.cheltuieli - salariu, 
+        ProfitPerMonth.profit = ProfitPerMonth.venit - ProfitPerMonth.cheltuieli
+        WHERE ProfitPerMonth.idPoliclinica = idPoliclinica
+        AND ProfitPerMonth.luna > azi;
+    
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Modific_Utilizator
+DELIMITER //
+CREATE procedure P_Modific_Utilizator ( idUtilizator int,
+										idPoliclinica int,
+										nume varchar(50),
+										prenume varchar(50),
+										adresa varchar(50),
+                                        nr_telefon varchar(50),
+                                        email varchar(50),
+                                        IBAN varchar(50) )
+BEGIN
+		UPDATE Utilizatori 
+        SET Utilizatori.idPoliclinica = idPoliclinica,
+        Utilizatori.nume = nume,
+        Utilizatori.prenume = prenume,
+        Utilizatori.adresa = adresa,
+        Utilizatori.nr_telefon = nr_telefon, 
+        Utilizatori.IBAN = IBAN,
+        Utilizatori.email = email
+        WHERE Utilizatori.idUtilizator = idUtilizator;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Adaugare_In_OrarSpecific
+DELIMITER //
+CREATE procedure P_Adaugare_In_OrarSpecific( 
+											idAngajat int,
+											numeAngajat varchar(30),
+											prenumeAngajat varchar (30),
+											dataSpecifica date,
+											oraInceput time,
+											oraSfarsit time)
+BEGIN
+
+	INSERT INTO OrarSpecific(idAngajat, numeAngajat, prenumeAngajat, dataSpecifica, oraInceput, oraSfarsit)
+	VALUES(idAngajat, numeAngajat, prenumeAngajat, dataSpecifica, oraInceput, oraSfarsit);
+
+END //
+DELIMITER ;
+
+select * from specializaremedici;
+
+DROP PROCEDURE IF EXISTS P_Insert_Cabinete
+DELIMITER //
+CREATE procedure P_Insert_Cabinete( numeCabinet varchar(30), idPoliclinica int )
+BEGIN
+
+	INSERT INTO Cabinete( numeCabinet, idPoliclinica )
+	VALUES( numeCabinet, idPoliclinica );
+
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_ManyToManyCabineteServiciiMedicale
+DELIMITER //
+CREATE procedure P_Insert_ManyToManyCabineteServiciiMedicale( idCabinet int, idServiciuMedical int, nrServiciu int )
+BEGIN
+
+	INSERT INTO ManyToManyCabineteServiciiMedicale( idCabinet, idServiciuMedical, nrServiciu )
+	VALUES( idCabinet, idServiciuMedical, nrServiciu );
+
+END //
+DELIMITER ;
+/* Se insereaza cand */
+DROP PROCEDURE IF EXISTS P_Insert_ManyToManyCabinetLiber
+DELIMITER //
+CREATE procedure P_Insert_ManyToManyCabinetLiber( idCabinet int, dataConsult date, oraConsult time)
+BEGIN
+	INSERT INTO ManyToManyCabinetLiber( idCabinet, dataConsult, oraConsult )
+	VALUES( idCabinet, dataConsult, oraConsult );
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS P_Insert_Specializari_ServiciiMedicale_For_Medic
+DELIMITER //
+CREATE procedure  P_Insert_Specializari_ServiciiMedicale_For_Medic ( idMedic int,
+											Specializare varchar(50),
+											gradMedic varchar(50),
+											ServiciuMedical varchar(50),
+											pretServiciu int,
+                                            durataServiciu varchar(50))
+BEGIN
+DECLARE idServiciuMedical int;
+DECLARE idSpecializare int;
+SELECT ServiciiMedicale.idServiciuMedical INTO idServiciuMedical FROM ServiciiMedicale WHERE ServiciiMedicale.Denumire = ServiciuMedical;
+SELECT SpecializareMedici.idSpecializare INTO idSpecializare FROM SpecializareMedici WHERE SpecializareMedici.Specializare = Specializare;
+INSERT INTO ManyToManyMediciSpecializari ( idMedic,
+								idSpecializare,
+                                specializare,
+								gradMedic,
+								idServiciu,
+                                denumireServiciu,
+								pretServiciu,
+								durataServiciu
+						)
+	VALUES (idMedic,
+			idSpecializare,
+            Specializare,
+			gradMedic,
+			idServiciuMedical,
+            ServiciuMedical,
+			pretServiciu,
+			durataServiciu
+			);
+END //
+DELIMITER ;
